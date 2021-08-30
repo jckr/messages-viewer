@@ -1,45 +1,35 @@
-import {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {exec} from '../store/actions/';
 
 /**
  * A simple SQL read-eval-print-loop
  * @param {{db: import("sql.js").Database}} props
  */
  export default function SQLRepl({ db }) {
-    const [error, setError] = useState(null);
-    const [results, setResults] = useState([]);
-  
-    function exec(sql) {
-      try {
-        // The sql is executed synchronously on the UI thread.
-        // You may want to use a web worker here instead
-        setResults(db.exec(sql)); // an array of objects is returned
-        setError(null);
-      } catch (err) {
-        // exec throws an error when the SQL statement is invalid
-        setError(err);
-        setResults([]);
-      }
-    }
-  
+    
+    const dispatch = useDispatch();
+    const results = useSelector((state) => state.results);
+    const error = useSelector((state) => state.replError);
+    console.log(error);
     return (
       <div className="App">
         <h1>React SQL interpreter</h1>
   
         <textarea
-          onChange={(e) => exec(e.target.value)}
+          onChange={(e) => dispatch(exec(e.target.value))}
           placeholder="Enter some SQL. No inspiration ? Try “select sqlite_version()”"
         ></textarea>
   
         <pre className="error">{(error || "").toString()}</pre>
   
-        <pre>
+        {results && <pre>
           {
             // results contains one object per select statement in the query
             results.map(({ columns, values }, i) => (
               <ResultsTable key={i} columns={columns} values={values} />
             ))
           }
-        </pre>
+        </pre>}
       </div>
     );
   }
