@@ -1,0 +1,24 @@
+.summary {
+    display: flex;
+    flex-direction: column;
+    background: var(--clear);
+    border: 1px var(--gray) solid;
+    min-width: calc(66vw - 24px);
+    min-height: 200px;
+    padding: 12px;
+}
+
+.summary-time-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.summary-time-button {
+    color: blue;
+    margin-right: 12px;
+}
+
+.summary-time-button:hover, 
+.summary-time-button:focus {
+    text-decoration: dashed;
+}
