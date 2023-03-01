@@ -2,7 +2,11 @@ import styles from "@/styles/Home.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { selectFiltersState, setStart, setEnd, setMax } from "@/slices/filters-slice";
-export default function Filters() {
+import { Database } from 'sql.js';
+
+export default function Filters({db} : {db: Database | null}) {
+  if (db) {console.log('db loaded.')} else {console.log('no db loaded.')}
+
   const filterState = useSelector(selectFiltersState);
   const dispatch = useDispatch();
   useEffect(() => {
