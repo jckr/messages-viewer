@@ -34,3 +34,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# private data
+./public/chat.db
+./public/chat.db-shm
+./public/chat.db-wal
+
