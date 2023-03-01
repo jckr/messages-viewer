@@ -21,7 +21,9 @@ export default function Home() {
     })
       .then((SQL) => {
         setSql(SQL);
-        fetch('chat.db')
+        const file = '/chat.db';
+        console.log(file);
+        fetch(file)
           .then((response) => response.arrayBuffer())
           .then((buffer) => {
             const typedArray = new Uint8Array(buffer);

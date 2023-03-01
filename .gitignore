@@ -36,7 +36,7 @@ yarn-error.log*
 next-env.d.ts
 
 # private data
-chat.db
-chat.db-shm
-chat.db-wal
+./public/chat.db
+./public/chat.db-shm
+./public/chat.db-wal
 
